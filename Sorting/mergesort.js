@@ -9,9 +9,12 @@ function mergeSort(array) {
 
     const length = array.length;
     const middle = Math.floor(length / 2);
-    let left = array.slice(0, middle);
-    let right = array.slice(middle);
+    const left = array.slice(0, middle);
+    const right = array.slice(middle);
 
+    console.log(left)
+    console.log(right)
+    console.log('------------------------------')
     return merge(mergeSort(left), mergeSort(right));
 
 
@@ -20,7 +23,7 @@ function mergeSort(array) {
 function merge(left, right) {
     let leftIndex = 0, rightIndex = 0;
     let result = [];
-    while (leftIndex !== left.length && rightIndex !== right.length) {
+    while (leftIndex < left.length && rightIndex < right.length) {
         if (left[leftIndex] < right[rightIndex]) {
             result.push(left[leftIndex]);
             leftIndex++;
@@ -30,10 +33,29 @@ function merge(left, right) {
             rightIndex++;
         }
     }
-    return result;
+
+    // fill remaining left array if any
+    if (leftIndex !== left.length) {
+        while (leftIndex < left.length) {
+            result.push(left[leftIndex]);
+            leftIndex++;
+        }
+    }
+
+    // fill remaining right array if any
+    if (rightIndex !== right.length) {
+        while (rightIndex < right.length) {
+            result.push(right[rightIndex]);
+            rightIndex++;
+        }
+    }
+
+
+    console.log('Merged => ',result)
+    return result
 }
 
-insertionSort(numbers)
 
-console.log(numbers)
+
+console.log(mergeSort(numbers))
 
